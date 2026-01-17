@@ -15,7 +15,10 @@ limitations under the License.
 """
 
 import abc
-from typing import Self
+try:
+    from typing import Self
+except ImportError:  # pragma: no cover - only hit on Python < 3.11
+    from typing_extensions import Self
 
 import numpy as np
 

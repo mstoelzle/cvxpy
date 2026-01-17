@@ -3,3 +3,4 @@ osqp
 scs
 numpy
 scipy
+typing_extensions; python_version < '3.11'

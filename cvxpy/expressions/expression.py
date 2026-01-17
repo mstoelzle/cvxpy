@@ -17,7 +17,12 @@ limitations under the License.
 import abc
 import warnings
 from functools import wraps
-from typing import List, Literal, Optional, Self, Tuple
+from typing import List, Literal, Optional, Tuple
+
+try:
+    from typing import Self
+except ImportError:  # pragma: no cover - only hit on Python < 3.11
+    from typing_extensions import Self
 
 import numpy as np
 
