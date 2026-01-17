@@ -197,8 +197,12 @@ class CUCLARABEL(ConicSolver):
 
         dims_to_solver_cones(jl, cones)
 
-        results = jl.seval("""
-        settings = Clarabel.Settings(direct_solve_method = :cudss)
+        # Clarabel.jl defaults to `verbose=true`, which prints a full solver header and
+        # iteration table. Respect CVXPY's `verbose` flag by passing it through to the
+        # Clarabel settings.
+        verbose_jl = str(bool(verbose)).lower()  # Julia uses `true`/`false`.
+        results = jl.seval(f"""
+        settings = Clarabel.Settings(direct_solve_method = :cudss, verbose = {verbose_jl})
         solver   = Clarabel.Solver(settings)
         solver   = Clarabel.setup!(solver, P,q,A,b,cones)
         Clarabel.solve!(solver)
